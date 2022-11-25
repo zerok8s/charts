@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "flannel.name" . }}-ds
+  labels:
+    tier: node
+    app: {{ include "flannel.name" . }}
+  {{- with .Values.flannel.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "flannel.name" . }}
+  template:
+    metadata:
+      labels:
+        tier: node
+        app: {{ include "flannel.name" . }}
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+      hostNetwork: true
+      priorityClassName: system-node-critical
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
+      serviceAccountName: flannel
+      initContainers:
+        - name: install-cni-plugin
+          image: {{ .Values.image.plugin.repository }}:{{ .Values.image.plugin.tag }}
+          imagePullPolicy: {{ .Values.image.plugin.pullPolicy }}
+          command:
+            - cp
+          args:
+            - -f
+            - /flannel
+            - /opt/cni/bin/flannel
+          volumeMounts:
+            - name: cni-plugin
+              mountPath: /opt/cni/bin
+        - name: install-cni
+          image: {{ .Values.image.flannel.repository }}:{{ default (include "flannel.defaultTag" .) .Values.image.flannel.tag }}
+          imagePullPolicy: {{ .Values.image.flannel.pullPolicy }}
+          command:
+            - cp
+          args:
+            - -f
+            - /etc/kube-flannel/cni-conf.json
+            - /etc/cni/net.d/10-flannel.conflist
+          volumeMounts:
+            - name: cni
+              mountPath: /etc/cni/net.d
+            - name: flannel-cfg
+              mountPath: /etc/kube-flannel/
+      containers:
+        - name: kube-flannel
+          image: {{ .Values.image.flannel.repository }}:{{ default (include "flannel.defaultTag" .) .Values.image.flannel.tag }}
+          imagePullPolicy: {{ .Values.image.flannel.pullPolicy }}
+          command:
+            - /opt/bin/flanneld
+          args:
+            - --ip-masq
+            - --kube-subnet-mgr
+            {{- with .Values.flannel.extraArgs }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.flannel.resources | nindent 12 }}
+          securityContext:
+            privileged: false
+            capabilities:
+              add: ["NET_ADMIN", "NET_RAW"]
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: EVENT_QUEUE_DEPTH
+              value: "{{ .Values.flannel.eventQueueDepth }}"
+          volumeMounts:
+            - name: run
+              mountPath: /run/flannel
+            - name: flannel-cfg
+              mountPath: /etc/kube-flannel/
+            - name: xtables-lock
+              mountPath: /run/xtables.lock
+      volumes:
+        - name: run
+          hostPath:
+            path: /run/flannel
+        - name: cni-plugin
+          hostPath:
+            path: /opt/cni/bin
+        - name: cni
+          hostPath:
+            path: /etc/cni/net.d
+        - name: flannel-cfg
+          configMap:
+            name: kube-flannel-cfg
+        - name: xtables-lock
+          hostPath:
+            path: /run/xtables.lock
+            type: FileOrCreate

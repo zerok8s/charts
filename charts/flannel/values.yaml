@@ -1,0 +1,40 @@
+network:
+  clusterCIDR: "10.244.0.0/16"
+  backendType: vxlan
+
+clusterAdminAccess:
+  enabled: true
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  plugin:
+    repository: docker.io/rancher/mirrored-flannelcni-flannel-cni-plugin
+    pullPolicy: IfNotPresent
+    tag: v1.1.0
+  flannel:
+    repository: docker.io/rancher/mirrored-flannelcni-flannel
+    pullPolicy: IfNotPresent
+    tag: ""
+
+flannel:
+  eventQueueDepth: 5000
+  extraArgs: []
+  annotations: {}
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "50Mi"
+    limits:
+      cpu: "100m"
+      memory: "50Mi"
+
+cni:
+  name: cbr0
+  version: 0.3.1
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
