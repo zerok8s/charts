@@ -3,7 +3,7 @@
 {{- end }}
 
 {{- define "flannel.defaultTag" -}}
-{{- default .Chart.AppVersion .Values.image.flannel.tag }}
+{{- default (printf "v%s" .Chart.AppVersion) .Values.image.flannel.tag }}
 {{- end -}}
 
 {{- define "serviceAccount.name" -}}

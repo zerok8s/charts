@@ -48,7 +48,7 @@ spec:
             - name: cni-plugin
               mountPath: /opt/cni/bin
         - name: install-cni
-          image: {{ .Values.image.flannel.repository }}:{{ default (include "flannel.defaultTag" .) .Values.image.flannel.tag }}
+          image: {{ .Values.image.flannel.repository }}:{{ include "flannel.defaultTag" . }}
           imagePullPolicy: {{ .Values.image.flannel.pullPolicy }}
           command:
             - cp
@@ -63,7 +63,7 @@ spec:
               mountPath: /etc/kube-flannel/
       containers:
         - name: kube-flannel
-          image: {{ .Values.image.flannel.repository }}:{{ default (include "flannel.defaultTag" .) .Values.image.flannel.tag }}
+          image: {{ .Values.image.flannel.repository }}:{{ include "flannel.defaultTag" . }}
           imagePullPolicy: {{ .Values.image.flannel.pullPolicy }}
           command:
             - /opt/bin/flanneld
