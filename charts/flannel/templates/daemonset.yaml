@@ -73,6 +73,10 @@ spec:
             {{- with .Values.flannel.extraArgs }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- with .Values.flannel.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.flannel.resources | nindent 12 }}
           securityContext:

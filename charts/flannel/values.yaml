@@ -22,6 +22,7 @@ flannel:
   eventQueueDepth: 5000
   extraArgs: []
   annotations: {}
+  livenessProbe: {}
   resources:
     requests:
       cpu: "100m"
