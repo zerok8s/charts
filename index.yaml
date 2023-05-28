@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   flannel:
   - apiVersion: v2
+    appVersion: 0.20.2
+    created: "2023-05-28T13:05:56.898622076Z"
+    description: A Helm chart for Flannel
+    digest: d841e3c92c332fa624911088f33b9c3126bde9dabb661be768eb9c100792bf7b
+    name: flannel
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/flannel-0.2.1/flannel-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 0.20.1
     created: "2022-11-27T16:47:54.327065618Z"
     description: A Helm chart for Flannel
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/flannel-0.1.0/flannel-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-27T16:47:54.327080519Z"
+generated: "2023-05-28T13:05:56.898645076Z"
