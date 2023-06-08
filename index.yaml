@@ -51,4 +51,15 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/flannel-0.1.0/flannel-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-28T13:05:56.898645076Z"
+  secrets:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-06-08T10:01:38.948211573Z"
+    description: A Helm chart for provisioning of secrets to Kubernetes
+    digest: 11977219cc21169639d5ee047a535b3fc3d548043893d048934b26d39b4a1bc8
+    name: secrets
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/secrets-0.1.0/secrets-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-08T10:01:38.948228873Z"
