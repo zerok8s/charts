@@ -64,6 +64,16 @@ entries:
     version: 0.1.0
   secrets:
   - apiVersion: v2
+    appVersion: 0.2.0
+    created: "2023-06-23T19:00:47.407385654Z"
+    description: A Helm chart for provisioning of secrets to Kubernetes
+    digest: 38014505781bd94d34f6c81e868e1251df7db017d52380393e1f3976ae0f5d01
+    name: secrets
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/secrets-0.2.0/secrets-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 0.1.1
     created: "2023-06-08T11:45:23.419331364Z"
     description: A Helm chart for provisioning of secrets to Kubernetes
@@ -83,4 +93,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/secrets-0.1.0/secrets-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-23T14:48:49.174134946Z"
+generated: "2023-06-23T19:00:47.407401754Z"
