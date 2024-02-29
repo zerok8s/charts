@@ -53,6 +53,16 @@ entries:
     version: 0.1.0
   manifests:
   - apiVersion: v2
+    appVersion: 0.2.1
+    created: "2024-02-29T12:38:34.330632399Z"
+    description: A Helm chart for rendering Kubernetes manifests
+    digest: 28780fbead773d49d5cbd694bc380970a96fef9be9dbfec22e4dc8fbb06e8f38
+    name: manifests
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/manifests-0.2.1/manifests-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 0.2.0
     created: "2024-02-13T22:42:17.307133193Z"
     description: A Helm chart for rendering Kubernetes manifests
@@ -103,4 +113,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/secrets-0.1.0/secrets-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-13T22:42:17.307164963Z"
+generated: "2024-02-29T12:38:34.330779603Z"
