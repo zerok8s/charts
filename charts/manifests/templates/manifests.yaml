@@ -1,4 +1,4 @@
-{{ range $manifest := .Values.manifests }}
-{{ tpl $manifest.template (merge $manifest.variables $) }}
+{{- range $manifest := .Values.manifests }}
 ---
-{{ end }}
+{{- tpl $manifest.template (merge ($manifest.variables) $) }}
+{{- end }}
