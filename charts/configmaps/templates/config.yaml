@@ -1,0 +1,5 @@
+{{- range $configName, $configContent := .Values.config }}
+{{ $data := dict "configName" $configName "configContent" $configContent "Values" $.Values "Release" $.Release . }}
+{{- include "defaultTemplate" $data }}
+---
+{{- end -}}

@@ -1,9 +1,9 @@
 {{- define "defaultTemplate" -}}
 apiVersion: v1
-kind: Secret
+kind: ConfigMap
 metadata:
   namespace: {{ coalesce .namespace .Release.Namespace }}
-  name: {{ .secretName }}
+  name: {{ .configName }}
 {{- if .Values.labels }}
   labels:
 {{ toYaml .Values.labels | indent 4 }}
@@ -12,7 +12,7 @@ metadata:
   annotations:
 {{ toYaml .Values.annotations | indent 4 }}
 {{- end }}
-stringData:
-{{ toYaml .secretContent | indent 2 }}
-type: {{ .type }}
+data:
+{{ toYaml .configContent | indent 2 }}
+
 {{- end }}
