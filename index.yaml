@@ -64,6 +64,16 @@ entries:
     version: 0.1.0
   manifests:
   - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2025-04-18T19:33:36.248000921Z"
+    description: A Helm chart for rendering Kubernetes manifests
+    digest: 25a21e796c578afd1fc32c2758ff8d6a99e40862cbcc8a65c59e5112892ca20e
+    name: manifests
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/manifests-0.3.0/manifests-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     appVersion: 0.2.1
     created: "2024-02-29T12:38:34.330632399Z"
     description: A Helm chart for rendering Kubernetes manifests
@@ -173,4 +183,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8/vaultwarden-0.1.8.tgz
     version: 0.1.8
-generated: "2024-07-01T19:44:03.793555286Z"
+generated: "2025-04-18T19:33:36.248045054Z"
