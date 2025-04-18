@@ -1,3 +1,32 @@
-manifests:
+manifests: []
   # - template: ""
   #   variables: {}
+
+extraManifests: []
+#  - apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: example-config
+#    data:
+#      example.property.1: "value1"
+#      example.property.2: "value2"
+# As an alternative to the above, you can also use a string as the value of the data field.
+#  - |
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: example-config-string
+#    data:
+#      example.property.1: "value1"
+#      example.property.2: "value2"
+
+# String extraManifests supports using variables directly within a string manifest.
+# Templates are rendered using the context defined in the values.yaml file, enabling dynamic and flexible content customization.
+extraTemplateManifests: []
+#  - |
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: my-config
+#    stringData:
+#      image_name: {{ .Values.image.repository }}
