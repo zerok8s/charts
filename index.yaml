@@ -127,6 +127,29 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/redis-ha-4.33.4/redis-ha-4.33.4.tgz
     version: 4.33.4
+  - apiVersion: v2
+    appVersion: 7.2.7
+    created: "2025-04-28T09:53:47.151231192Z"
+    description: This Helm chart provides a highly available Redis implementation
+      with a master/slave configuration and uses Sentinel sidecars for failover management
+    digest: b1014d94811f8aa54c5f2ef312c9ef1a1cbcbd950703ff34b36ee0ddbdfa2575
+    home: http://redis.io/
+    icon: https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Redis_Logo.svg/1200px-Redis_Logo.svg.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: aaron.layfield@gmail.com
+      name: dandydeveloper
+    name: redis-ha
+    sources:
+    - https://redis.io/download
+    - https://github.com/DandyDeveloper/charts/blob/master/charts/redis-ha
+    - https://github.com/oliver006/redis_exporter
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/redis-ha-4.33.4-1/redis-ha-4.33.4-1.tgz
+    version: 4.33.4-1
   secrets:
   - apiVersion: v2
     appVersion: 0.2.1
@@ -207,4 +230,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8/vaultwarden-0.1.8.tgz
     version: 0.1.8
-generated: "2025-04-28T09:51:25.155310648Z"
+generated: "2025-04-28T09:53:47.151255688Z"
