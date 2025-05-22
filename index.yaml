@@ -230,4 +230,42 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8/vaultwarden-0.1.8.tgz
     version: 0.1.8
-generated: "2025-04-28T09:53:47.151255688Z"
+  - annotations:
+      artifacthub.io/images: |
+        - name: vaultwarden
+          image: docker.io/vaultwarden/server:1.30.0-alpine
+      artifacthub.io/license: MIT
+      category: DeveloperTools
+    apiVersion: v2
+    appVersion: 1.30.0
+    created: "2025-05-22T10:21:19.617521357Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Vaultwarden is an unofficial Bitwarden-compatible server written
+      in Rust
+    digest: 0ceda469b47a3bf134215caf0ac58749b984b080f66e9b2a01d27b76ff90a8fd
+    home: https://lab.frogg.it/doca/vaultwarden-helm
+    icon: https://yunohost.org/user/images/bitwarden_logo.png
+    keywords:
+    - Rust
+    - vaultwarden
+    maintainers:
+    - email: benoit.pourre@gmail.com
+      name: Benoît Pourre
+      url: https://github.com/captnbp
+    name: vaultwarden
+    sources:
+    - https://lab.frogg.it/doca/vaultwarden-helm
+    - https://github.com/dani-garcia/vaultwarden
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8-1/vaultwarden-0.1.8-1.tgz
+    version: 0.1.8-1
+generated: "2025-05-22T10:21:19.617554605Z"
