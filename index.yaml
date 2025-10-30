@@ -203,6 +203,44 @@ entries:
           image: ghcr.io/drakkan/sftpgo:v2.7.0-distroless-slim
     apiVersion: v2
     appVersion: 2.7.0
+    created: "2025-10-30T14:00:53.58163219Z"
+    description: Full-featured and highly configurable SFTP, HTTP/S, FTP/S and WebDAV
+      server.
+    digest: 0ec7bf9600eb182de847260a823388dd47f4f4f5222555bfe4ad4f846c4637ef
+    home: https://sftpgo.com
+    icon: https://cdn.statically.io/gh/drakkan/sftpgo/v2.7.0/static/img/logo.png
+    keywords:
+    - sftp
+    - ftp
+    - webdav
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: mark@sagikazarmark.com
+      name: sagikazarmark
+      url: https://sagikazarmark.com
+    - email: nicola.murino@gmail.com
+      name: Nicola Murino
+      url: https://sftpgo.com
+    name: sftpgo
+    sources:
+    - https://github.com/drakkan/sftpgo
+    - https://github.com/sftpgo/helm-chart
+    - https://github.com/sagikazarmark/helm-charts/tree/06ebf671519118f1ddabf1ba7dd7f4e2f85ea816/charts/sftpgo
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/sftpgo-2.7.0/sftpgo-2.7.0.tgz
+    version: 2.7.0
+  - annotations:
+      artifacthub.io/changes: ""
+      artifacthub.io/images: |
+        - name: sftpgo
+          image: ghcr.io/drakkan/sftpgo:v2.7.0
+        - name: sftpgo-alpine
+          image: ghcr.io/drakkan/sftpgo:v2.7.0-alpine
+        - name: sftpgo-distroless-slim
+          image: ghcr.io/drakkan/sftpgo:v2.7.0-distroless-slim
+    apiVersion: v2
+    appVersion: 2.7.0
     created: "2025-10-30T13:56:29.948016241Z"
     description: Full-featured and highly configurable SFTP, HTTP/S, FTP/S and WebDAV
       server.
@@ -307,4 +345,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8-1/vaultwarden-0.1.8-1.tgz
     version: 0.1.8-1
-generated: "2025-10-30T13:56:29.948049323Z"
+generated: "2025-10-30T14:00:53.581668889Z"
