@@ -1,0 +1,4 @@
+[submodule "external/sftpgo"]
+	path = external/sftpgo
+	url = git@github.com:zerok8s/sftpgo-helm-chart.git
+	branch = enhanced
