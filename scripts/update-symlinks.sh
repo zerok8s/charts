@@ -45,6 +45,7 @@ for link_file in ${link_files}; do
   fi
 done
 
+changed_files=$(lookup_changed_files "${latest_tag}")
 echo
 echo "Changed files after symlink update in '${charts_dir}' since '${latest_tag}':"
 printf -- '- %s\n' ${changed_files}
