@@ -27,9 +27,6 @@ jobs:
           helm repo add postgresql https://charts.bitnami.com/bitnami
           helm repo add common https://charts.bitnami.com/bitnami
 
-      - name: Copy external charts
-        run: bash scripts/copy-external-charts.sh
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         env:
