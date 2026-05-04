@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  alb-controller:
+  - apiVersion: v2
+    appVersion: 1.10.26
+    created: "2026-05-04T19:42:03.704429986Z"
+    description: A Helm chart to install the ALB Controller on Kubernetes
+    digest: 90efe36ced288f14c85832c8a9b1eedd232dfd2a0f6fbd321597fa70f82e0a84
+    kubeVersion: '>= 1.20.0-0'
+    name: alb-controller
+    type: application
+    urls:
+    - https://github.com/zerok8s/charts/releases/download/alb-controller-1.10.26-1/alb-controller-1.10.26-1.tgz
+    version: 1.10.26-1
   configmaps:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -611,4 +623,4 @@ entries:
     urls:
     - https://github.com/zerok8s/charts/releases/download/vaultwarden-0.1.8-1/vaultwarden-0.1.8-1.tgz
     version: 0.1.8-1
-generated: "2026-02-27T11:38:19.710969715Z"
+generated: "2026-05-04T19:42:03.704508393Z"
