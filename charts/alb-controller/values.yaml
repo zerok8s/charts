@@ -1,0 +1,77 @@
+# Default values for ALB Controller.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+albController:
+  # -- Namespace to deploy alb-controller components in.
+  namespace: "azure-alb-system"
+
+  # -- environment variables for alb-controller
+  env:
+    - name: ""
+      value: ""
+
+  # image pull secret for alb-controller containers
+  imagePullSecrets: []
+  #
+  # -- alb-controller image parameters
+  image:
+    # -- Container image registry for alb controller
+    registry: mcr.microsoft.com
+    # -- Container image pull policy for controller containers
+    pullPolicy: IfNotPresent
+    # -- Container image tag for alb-controller images
+    # tag: "latest-main"
+    # -- Image name defaults
+    name:
+      # -- alb-controller's image name
+      controller: application-lb/images/alb-controller
+      # -- alb-controller's crds' image name
+      CRDs: application-lb/images/alb-controller-crds
+      # -- alb-controller bootstrap's image name
+      bootstrap: application-lb/images/alb-controller-bootstrap
+
+  # -- Log level of alb-controller
+  logLevel: info
+  # -- A flag to enable/disable installation of Gateway API CRDs
+  installGatewayApiCRDs: true
+
+  # -- feature flags
+
+  # Enable Application Load Balancer Security Policy Resource
+  securityPolicyFeatureFlag: true
+
+  # Enable Application Load Balancer IP Access Rules
+  ipAccessRulesFeatureFlag: false
+
+  # -- pod-identity parameters for alb-controller
+  podIdentity:
+    clientID: ""
+
+  # -- controller parameters
+  controller:
+    # -- nodeSelector for alb-controller
+    nodeSelector: {}
+    # -- tolerations for alb-controller
+    tolerations: []
+    # -- controller's replica count
+    replicaCount: 2
+    # -- controller's container resource parameters
+    resource:
+      limits:
+        cpu: "400m"
+        memory: "400Mi"
+      requests:
+        cpu: "100m"
+        memory: "200Mi"
+
+  # -- init parameters
+  init:
+    # -- init container's resource parameters
+    resource:
+      limits:
+        cpu: "200m"
+        memory: "128Mi"
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
