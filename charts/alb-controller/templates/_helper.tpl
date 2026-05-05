@@ -1,6 +1,6 @@
 {{/* Determine alb-controller namespace */}}
 {{- define "albController.namespace" -}}
-{{ default .Values.albController.namespace}}
+{{ default .Values.albController.namespace }}
 {{- end -}}
 
 {{/* Reference to the container image tag */}}
@@ -8,7 +8,7 @@
 {{- if .Values.albController.image.tag -}}
 {{- .Values.albController.image.tag -}}
 {{- else -}}
-{{- .Chart.Version -}}
+{{- .Chart.AppVersion -}}
 {{- end -}}
 {{- end -}}
 

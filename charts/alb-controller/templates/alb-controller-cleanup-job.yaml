@@ -64,30 +64,30 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                - linux
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
-              - key: type
-                operator: NotIn
-                values:
-                - virtual-kubelet
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                  - key: type
+                    operator: NotIn
+                    values:
+                      - virtual-kubelet
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - alb-controller
-              topologyKey: kubernetes.io/hostname
-            weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - alb-controller
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       priorityClassName: system-node-critical
       serviceAccountName: alb-predelete-sa
       securityContext:
@@ -118,19 +118,19 @@ spec:
       {{- end }}
       restartPolicy: OnFailure
       containers:
-      - name: cleanup
-        image: "{{ include "albControllerCRDs.image" . }}"
-        imagePullPolicy: IfNotPresent
-        command:
-          - sh
-          - -c
-          - |
-            if kubectl get crd overlayextensionconfigs.acn.azure.com > /dev/null 2>&1; then
-              kubectl delete --ignore-not-found --wait -n {{ include "albController.namespace" . }} overlayextensionconfigs.acn.azure.com -l \
-                "app.kubernetes.io/managed-by=alb-controller"
-            else
-              echo "CRD OverlayExtensionConfig not found in the cluster. Skipping cleanup."
-            fi
+        - name: cleanup
+          image: "{{ include "albControllerCRDs.image" . }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              if kubectl get crd overlayextensionconfigs.acn.azure.com > /dev/null 2>&1; then
+                kubectl delete --ignore-not-found --wait -n {{ include "albController.namespace" . }} overlayextensionconfigs.acn.azure.com -l \
+                  "app.kubernetes.io/managed-by=alb-controller"
+              else
+                echo "CRD OverlayExtensionConfig not found in the cluster. Skipping cleanup."
+              fi
     {{- if .Values.albController.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.albController.imagePullSecrets | indent 8 }}

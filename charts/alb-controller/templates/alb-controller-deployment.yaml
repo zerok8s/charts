@@ -25,32 +25,32 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.azure.com/cluster
-                operator: Exists
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                - linux
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
-              - key: type
-                operator: NotIn
-                values:
-                - virtual-kubelet
+              - matchExpressions:
+                  - key: kubernetes.azure.com/cluster
+                    operator: Exists
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                  - key: type
+                    operator: NotIn
+                    values:
+                      - virtual-kubelet
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - alb-controller
-              topologyKey: kubernetes.io/hostname
-            weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - alb-controller
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       priorityClassName: system-node-critical
       serviceAccountName: alb-controller-sa
       securityContext:
@@ -62,44 +62,44 @@ spec:
 {{ toYaml . | indent 8 }}
       {{- end}}
       tolerations:
-      - key: node.kubernetes.io/unreachable
-        operator: Exists
-        effect: NoExecute
-        tolerationSeconds: 6000
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 6000
       {{- range .Values.albController.controller.tolerations }}
-      - key: {{ .key }}
-        operator: {{ .operator }}
+        - key: {{ .key }}
+          operator: {{ .operator }}
         {{- if .effect }}
-        effect: {{ .effect }}
+          effect: {{ .effect }}
         {{- end }}
         {{- if .value }}
-        value: {{ .value | quote }}
+          value: {{ .value | quote }}
         {{- end }}
         {{- if .tolerationSeconds }}
-        tolerationSeconds: {{ .tolerationSeconds }}
+          tolerationSeconds: {{ .tolerationSeconds }}
         {{- end }}
       {{- end }}
       initContainers:
-      # This container installs the CRDs required by alb controller on the cluster
+        # This container installs the CRDs required by alb controller on the cluster
         - name: init-alb-controller-crds
           image: "{{ include "albControllerCRDs.image" . }}"
           imagePullPolicy: {{ .Values.albController.image.pullPolicy }}
           command:
-          - kubectl
-          - apply
-          - -f
-          - /alb-controller-crds/agc-crds
+            - kubectl
+            - apply
+            - -f
+            - /alb-controller-crds/agc-crds
           {{- if .Values.albController.installGatewayApiCRDs }}
-          - -f
-          - /alb-controller-crds/gateway-api-crds
+            - -f
+            - /alb-controller-crds/gateway-api-crds
           {{- end }}
           {{- if .Values.albController.securityPolicyFeatureFlag }}
-          - -f
-          - /alb-controller-crds/extra-crds/alb.networking.azure.io_webapplicationfirewallpolicy.yaml
+            - -f
+            - /alb-controller-crds/extra-crds/alb.networking.azure.io_webapplicationfirewallpolicy.yaml
           {{- end }}
           {{- if .Values.albController.ipAccessRulesFeatureFlag }}
-          - -f
-          - /alb-controller-crds/extra-crds/alb.networking.azure.io_ipaccessrulespolicy.yaml
+            - -f
+            - /alb-controller-crds/extra-crds/alb.networking.azure.io_ipaccessrulespolicy.yaml
           {{- end }}
           resources:
             limits:
@@ -108,10 +108,10 @@ spec:
             requests:
               cpu: "{{.Values.albController.init.resource.requests.cpu}}"
               memory: "{{.Values.albController.init.resource.requests.memory}}"
-      # This container installs the default CR's required by alb controller on the cluster
+        # This container installs the default CR's required by alb controller on the cluster
         - name: init-alb-controller-bootstrap
-          image:  "{{ include "albControllerBootstrap.image" .}}"
-          imagePullPolicy:  {{ .Values.albController.image.pullPolicy }}
+          image: "{{ include "albControllerBootstrap.image" .}}"
+          imagePullPolicy: {{ .Values.albController.image.pullPolicy }}
           command: ['/alb-controller-bootstrap']
           resources:
             limits:
@@ -139,13 +139,13 @@ spec:
           command: ['/alb-controller']
           env:
           {{- if .Values.albController.podIdentity }}
-          - name: AZURE_CLIENT_ID
-            value: {{ .Values.albController.podIdentity.clientID }}
+            - name: AZURE_CLIENT_ID
+              value: {{ .Values.albController.podIdentity.clientID }}
           {{- end }}
           {{- range .Values.albController.env }}
           {{- if .name }}
-          - name: {{ quote .name }}
-            value: {{ quote .value }}
+            - name: {{ quote .name }}
+              value: {{ quote .value }}
           {{- end }}
           {{- end }}
           args: [
@@ -154,7 +154,7 @@ spec:
             {{- if .Values.albController.securityPolicyFeatureFlag }}
             "--alb-security-policy-feature-flag=true",
             {{- end }}
-             {{- if .Values.albController.ipAccessRulesFeatureFlag }}
+            {{- if .Values.albController.ipAccessRulesFeatureFlag }}
             "--alb-ip-access-rules-policy-feature-flag=true",
             {{- end }}
           ]

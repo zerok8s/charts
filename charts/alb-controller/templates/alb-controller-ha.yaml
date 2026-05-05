@@ -2,7 +2,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: alb-controller-pdb
-  namespace:  {{ include "albController.namespace" . }}
+  namespace: {{ include "albController.namespace" . }}
   labels:
     app: alb-controller
 spec:
